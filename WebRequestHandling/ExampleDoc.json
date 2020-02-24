@@ -1,0 +1,3046 @@
+{
+  "x-generator": "NSwag v13.1.3.0 (NJsonSchema v10.0.27.0 (Newtonsoft.Json v12.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "My Title",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/User": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "operationId": "User_Get",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ticket": {
+      "get": {
+        "tags": [
+          "Ticket"
+        ],
+        "operationId": "Ticket_GetTickets",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PpqTicketResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Ticket"
+        ],
+        "operationId": "Ticket_CreateTicket",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PpqTicketRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Ticket/{id}": {
+      "delete": {
+        "tags": [
+          "Ticket"
+        ],
+        "operationId": "Ticket_DeleteTicket",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "format": "int32",
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Ticket/ticketPrefill": {
+      "get": {
+        "tags": [
+          "Ticket"
+        ],
+        "operationId": "Ticket_GetTicketPrefill",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "navisionProductNumber",
+            "in": "query",
+            "x-position": 1,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketPrefillResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Ticket/convertTicketToBasketItems": {
+      "post": {
+        "tags": [
+          "Ticket"
+        ],
+        "operationId": "Ticket_ConvertTicketToBasketItems",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "x-position": 1,
+            "format": "int32",
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Quotes": {
+      "post": {
+        "tags": [
+          "Quotes"
+        ],
+        "operationId": "Quotes_Create",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteCreationResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Quotes"
+        ],
+        "operationId": "Quotes_GetQuotes",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/QuoteResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Quotes/poReference": {
+      "post": {
+        "tags": [
+          "Quotes"
+        ],
+        "operationId": "Quotes_SetPurchaseOrderReference",
+        "requestBody": {
+          "x-name": "purchaseOrderReference",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Quotes/paymentTerm": {
+      "post": {
+        "tags": [
+          "Quotes"
+        ],
+        "operationId": "Quotes_SetPaymentTerm",
+        "requestBody": {
+          "x-name": "paymentTerm",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Quotes/quoteValidUntil": {
+      "post": {
+        "tags": [
+          "Quotes"
+        ],
+        "operationId": "Quotes_SetQuoteValidUntil",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "quoteValidUntil",
+            "in": "query",
+            "x-position": 1,
+            "format": "date-time",
+            "nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Quotes/publishToPyraCloud": {
+      "get": {
+        "tags": [
+          "Quotes"
+        ],
+        "operationId": "Quotes_GetPublishToPyraCloud",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublishToPyraCloudState"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Quotes"
+        ],
+        "operationId": "Quotes_SetRequestPublishToPyraCloud",
+        "parameters": [
+          {
+            "type": "boolean",
+            "name": "publishToPyraCloud",
+            "in": "query",
+            "x-position": 1,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Publisher/search": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "operationId": "Publisher_Search",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "searchTerm",
+            "in": "query",
+            "x-position": 1,
+            "nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "resultLimit",
+            "in": "query",
+            "x-position": 2,
+            "format": "int32",
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PublisherResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Publisher/getByName": {
+      "get": {
+        "tags": [
+          "Publisher"
+        ],
+        "operationId": "Publisher_GetByName",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "name",
+            "in": "query",
+            "x-position": 1,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublisherResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/search": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_Search",
+        "requestBody": {
+          "x-name": "productFilter",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductFilterRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResultResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/manufacturers": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_SearchManufacturers",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "searchTerm",
+            "in": "query",
+            "x-position": 1,
+            "nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "resultLimit",
+            "in": "query",
+            "x-position": 2,
+            "format": "int32",
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ManufacturerResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/manufacturer/{manufacturerCode}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_GetManufacturerByCode",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "manufacturerCode",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturerResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/contracts": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_GetContracts",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContractResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/licenseModels/{manufacturerName}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_GetLicenseModelsByManufacturer",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "manufacturerName",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LicenseModelResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/discountLevels": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_GetDiscountLevelsByManufacturerAndLicenseModel",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "manufacturerCode",
+            "in": "query",
+            "x-position": 1,
+            "nullable": false
+          },
+          {
+            "type": "string",
+            "name": "licenseModelCode",
+            "in": "query",
+            "x-position": 2,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DiscountLevelResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/itemCategory": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_GetItemCategories",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ItemCategory"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/language": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_GetLanguages",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Language"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/operatingSystem": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_GetOperatingSystems",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OperatingSystem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Products/productVendor/search": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "operationId": "Products_SearchProductVendor",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "term",
+            "in": "query",
+            "x-position": 1,
+            "nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "limit",
+            "in": "query",
+            "x-position": 2,
+            "format": "int32",
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProductVendorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/PaymentTerms": {
+      "get": {
+        "tags": [
+          "PaymentTerms"
+        ],
+        "operationId": "PaymentTerms_GetPaymentTerms",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentTermResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Opportunity": {
+      "get": {
+        "tags": [
+          "Opportunity"
+        ],
+        "operationId": "Opportunity_GetCurrentOpportunity",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpportunityResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Opportunity"
+        ],
+        "operationId": "Opportunity_ConvertOpportunityLineToBasketLine",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBasketLineFromOpportunityLineRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Feedback": {
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "operationId": "Feedback_SendFeedback",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Events": {
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "operationId": "Events_LogEvent",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EventRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Customer/countryCode/{customerId}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_GetCountryCodes",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Customer/searchCustomer/{countryCode}/{searchTerm}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_SearchCustomer",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "searchTerm",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "resultLimit",
+            "in": "query",
+            "x-position": 2,
+            "format": "int32",
+            "nullable": false
+          },
+          {
+            "type": "string",
+            "name": "countryCode",
+            "in": "path",
+            "required": true,
+            "x-position": 3,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Customer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Customer/searchContact/{countryCode}/{searchTerm}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_SearchContact",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "searchTerm",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": false
+          },
+          {
+            "type": "integer",
+            "name": "resultLimit",
+            "in": "query",
+            "x-position": 2,
+            "format": "int32",
+            "nullable": false
+          },
+          {
+            "type": "string",
+            "name": "countryCode",
+            "in": "path",
+            "required": true,
+            "x-position": 3,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Customer/customer/{countryCode}/{customerId}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_GetCustomerById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": false
+          },
+          {
+            "type": "string",
+            "name": "countryCode",
+            "in": "path",
+            "required": true,
+            "x-position": 2,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Customer/contact/{countryCode}/{contactId}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_GetContactById",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "contactId",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": false
+          },
+          {
+            "type": "string",
+            "name": "countryCode",
+            "in": "path",
+            "required": true,
+            "x-position": 2,
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Customer/hasPyraCloudAccess": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "operationId": "Customer_CustomerHasPyraCloudAccess",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Currency/currencies": {
+      "get": {
+        "tags": [
+          "Currency"
+        ],
+        "operationId": "Currency_GetAllCurrencies",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CurrencyResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Currency/currencyCode": {
+      "post": {
+        "tags": [
+          "Currency"
+        ],
+        "operationId": "Currency_SetCurrencyCode",
+        "requestBody": {
+          "x-name": "currencyCode",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Cases": {
+      "get": {
+        "tags": [
+          "Cases"
+        ],
+        "operationId": "Cases_GetCurrentCase",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Cases"
+        ],
+        "operationId": "Cases_EnsureCaseContextIsInitialized",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseContextInitialisationResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Cases"
+        ],
+        "operationId": "Cases_UpdateCaseContext",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCaseRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Cases/caseDetails": {
+      "get": {
+        "tags": [
+          "Cases"
+        ],
+        "operationId": "Cases_GetCaseDetails",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerSettingsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket": {
+      "get": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_GetBasket",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BasketResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/contracts/{internalItemNumber}": {
+      "get": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_GetContractsByNavisionItemNumber",
+        "parameters": [
+          {
+            "type": "string",
+            "name": "internalItemNumber",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContractResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_AddBasketItem",
+        "requestBody": {
+          "x-name": "itemRequest",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasketItemRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/{basketItemId}/vendor": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_OverrideVendor",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "basketItemId",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "format": "int32",
+            "nullable": false
+          },
+          {
+            "type": "string",
+            "name": "vendorNumber",
+            "in": "query",
+            "x-position": 2,
+            "nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/{basketItemId}/contract": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_UpdateContract",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "basketItemId",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "format": "int32",
+            "nullable": false
+          },
+          {
+            "type": "string",
+            "name": "contractNumber",
+            "in": "query",
+            "x-position": 2,
+            "nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/quantity": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_UpdateQuantity",
+        "requestBody": {
+          "x-name": "qtyRequest",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasketItemQuantityChangeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/salesPrice": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_UpdateSalesPriceOverride",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasketItemSalesPriceOverrideChangeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/purchasePrice": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_UpdatePurchasePriceOverride",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasketItemPurchasePriceOverrideChangeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/productName": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_UpdateProductNameOverride",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasketItemProductNameOverrideChangeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/productDescription": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_UpdateProductDescriptionOverride",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasketItemProductDescriptionOverrideChangeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/startDate": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_UpdateLicenceStartDateOverride",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasketItemLicenceStartDateOverrideChangeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/endDate": {
+      "post": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_UpdateLicenceEndDateOverride",
+        "requestBody": {
+          "x-name": "request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasketItemLicenceEndDateOverrideChangeRequest"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Basket/basketItems/{basketItemId}": {
+      "delete": {
+        "tags": [
+          "Basket"
+        ],
+        "operationId": "Basket_DeleteBasketItem",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "basketItemId",
+            "in": "path",
+            "required": true,
+            "x-position": 1,
+            "format": "int32",
+            "nullable": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CurrentUserResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "displayName"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          }
+        }
+      },
+      "PpqTicketResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "ticketNumber",
+          "serviceNowTicketId",
+          "caseId",
+          "creationTime",
+          "manufacturerName",
+          "website",
+          "manufacturerNumber",
+          "internalItemNumber",
+          "requestingUserName",
+          "productName",
+          "language",
+          "version",
+          "quantity",
+          "licenceType",
+          "certificateNumber",
+          "os",
+          "licenceModel",
+          "subsidiary",
+          "additionalInfo",
+          "status",
+          "serviceNowTicketUrl",
+          "canBeConvertedToBasketItem"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ticketNumber": {
+            "type": "string"
+          },
+          "serviceNowTicketId": {
+            "type": "string"
+          },
+          "caseId": {
+            "type": "string"
+          },
+          "creationTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "manufacturerName": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "manufacturerNumber": {
+            "type": "string"
+          },
+          "internalItemNumber": {
+            "type": "string"
+          },
+          "requestingUserName": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "ppqResultProductName": {
+            "type": "string"
+          },
+          "ppqResultProductDescription": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "purchasePrice": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ppqResultItemQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "licenceType": {
+            "type": "string"
+          },
+          "ppqResultStartDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ppqResultEndDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "certificateNumber": {
+            "type": "string"
+          },
+          "os": {
+            "type": "string"
+          },
+          "licenceModel": {
+            "type": "string"
+          },
+          "subsidiary": {
+            "type": "string"
+          },
+          "ppqResultVendorNo": {
+            "type": "string"
+          },
+          "ppqResultVendor": {
+            "type": "string"
+          },
+          "ppqResultVendorQuoteNo": {
+            "type": "string"
+          },
+          "ppqResultValidUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "additionalInfo": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PpqStatus"
+          },
+          "serviceNowTicketUrl": {
+            "type": "string"
+          },
+          "canBeConvertedToBasketItem": {
+            "type": "boolean"
+          },
+          "navisionPpqResultId": {
+            "type": "string"
+          }
+        }
+      },
+      "PriceResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "amount",
+          "currency"
+        ],
+        "properties": {
+          "amount": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "currency": {
+            "type": "string"
+          }
+        }
+      },
+      "PpqStatus": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "value",
+          "isFinished"
+        ],
+        "properties": {
+          "value": {
+            "type": "string"
+          },
+          "isFinished": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PpqTicketRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "publisherName",
+          "website",
+          "publisherItemId",
+          "internalItemNumber",
+          "productName",
+          "language",
+          "version",
+          "quantity",
+          "itemCategory",
+          "certificateNumber",
+          "os",
+          "licenceModel",
+          "maintenanceRequired",
+          "additionalInfo",
+          "isCreatedFromProduct"
+        ],
+        "properties": {
+          "publisherName": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          },
+          "publisherItemId": {
+            "type": "string"
+          },
+          "internalItemNumber": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemCategory": {
+            "type": "string"
+          },
+          "certificateNumber": {
+            "type": "string"
+          },
+          "os": {
+            "type": "string"
+          },
+          "licenceModel": {
+            "type": "string"
+          },
+          "maintenanceRequired": {
+            "type": "boolean"
+          },
+          "additionalInfo": {
+            "type": "string"
+          },
+          "isCreatedFromProduct": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TicketPrefillResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "internalProductNumber",
+          "productName",
+          "itemCategoryCode",
+          "operatingSystem"
+        ],
+        "properties": {
+          "internalProductNumber": {
+            "type": "string"
+          },
+          "productName": {
+            "type": "string"
+          },
+          "publisherItemNumber": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "publisherName": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "itemCategoryCode": {
+            "type": "string"
+          },
+          "operatingSystem": {
+            "type": "string"
+          }
+        }
+      },
+      "QuoteCreationResult": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "json",
+          "validationErrors"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "json": {
+            "type": "string"
+          },
+          "validationErrors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "QuoteResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "created",
+          "quoteStatus",
+          "publishToPyraCloud",
+          "totalQuantity"
+        ],
+        "properties": {
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "navShopQuoteNumber": {
+            "type": "string"
+          },
+          "navSalesQuoteNumber": {
+            "type": "string"
+          },
+          "quoteStatus": {
+            "$ref": "#/components/schemas/QuoteStatus"
+          },
+          "licenseCustomerNumber": {
+            "type": "string"
+          },
+          "licenseCustomerName": {
+            "type": "string"
+          },
+          "billToCustomerNumber": {
+            "type": "string"
+          },
+          "billToCustomerName": {
+            "type": "string"
+          },
+          "publishToPyraCloud": {
+            "type": "boolean"
+          },
+          "quoteValidUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reference": {
+            "type": "string"
+          },
+          "totalQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalAmount": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "totalMargin": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuoteLineResponse"
+            }
+          }
+        }
+      },
+      "QuoteStatus": {
+        "type": "string",
+        "description": "",
+        "x-enumNames": [
+          "Open",
+          "Released",
+          "PendingApproval",
+          "PendingAuthorization"
+        ],
+        "enum": [
+          "Open",
+          "Released",
+          "PendingApproval",
+          "PendingAuthorization"
+        ]
+      },
+      "QuoteLineResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "quantity"
+        ],
+        "properties": {
+          "manufacturerCode": {
+            "type": "string"
+          },
+          "sku": {
+            "type": "string"
+          },
+          "itemNumber": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "purchasePrice": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "salesPrice": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "margin": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "contractNumber": {
+            "type": "string"
+          },
+          "vendorNumber": {
+            "type": "string"
+          },
+          "vendorName": {
+            "type": "string"
+          }
+        }
+      },
+      "PublishToPyraCloudState": {
+        "type": "string",
+        "description": "",
+        "x-enumNames": [
+          "Publish",
+          "DoNotPublish",
+          "NotAllowed"
+        ],
+        "enum": [
+          "Publish",
+          "DoNotPublish",
+          "NotAllowed"
+        ]
+      },
+      "PublisherResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "isBlacklisted"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "isBlacklisted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SearchResultResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "products"
+        ],
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductResponse"
+            }
+          },
+          "productFilter": {
+            "$ref": "#/components/schemas/ProductFilterRequest"
+          }
+        }
+      },
+      "ProductResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "internalItemNumber",
+          "manufacturer",
+          "publisherItemNumber",
+          "name",
+          "description",
+          "itemCategory",
+          "licenceModel",
+          "discountLevel",
+          "language",
+          "version",
+          "blocked"
+        ],
+        "properties": {
+          "internalItemNumber": {
+            "type": "string"
+          },
+          "manufacturer": {
+            "type": "string"
+          },
+          "publisherItemNumber": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "itemCategory": {
+            "$ref": "#/components/schemas/ItemCategory"
+          },
+          "licenceModel": {
+            "type": "string"
+          },
+          "discountLevel": {
+            "type": "string"
+          },
+          "language": {
+            "$ref": "#/components/schemas/Language"
+          },
+          "version": {
+            "type": "string"
+          },
+          "blocked": {
+            "type": "boolean"
+          },
+          "purchasePrice": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "salesPrice": {
+            "$ref": "#/components/schemas/PriceResponse"
+          }
+        }
+      },
+      "ItemCategory": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "description"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "Language": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "name"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductFilterRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "searchTerm",
+          "itemCatalog",
+          "showBlockedItems"
+        ],
+        "properties": {
+          "searchTerm": {
+            "type": "string"
+          },
+          "manufacturerCode": {
+            "type": "string"
+          },
+          "contractNumber": {
+            "type": "string"
+          },
+          "licenseModelCode": {
+            "type": "string"
+          },
+          "discountLevel": {
+            "type": "string"
+          },
+          "languageCode": {
+            "type": "string"
+          },
+          "itemCatalog": {
+            "type": "boolean"
+          },
+          "showBlockedItems": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ManufacturerResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "name"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ContractResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "number"
+        ],
+        "properties": {
+          "number": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "manufacturerCode": {
+            "type": "string"
+          },
+          "licenseModelCode": {
+            "type": "string"
+          },
+          "discountLevelCode": {
+            "type": "string"
+          }
+        }
+      },
+      "LicenseModelResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "manufacturerName"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "manufacturerName": {
+            "type": "string"
+          }
+        }
+      },
+      "DiscountLevelResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "OperatingSystem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "description"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "ProductVendorResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentTermResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "description"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "OpportunityResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "number",
+          "lines"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "number": {
+            "type": "string"
+          },
+          "totalAmount": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "grossProfit": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpportunityLineResponse"
+            }
+          }
+        }
+      },
+      "OpportunityLineResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "number",
+          "lineNumber",
+          "quantity",
+          "lineWasAlreadyConvertedToBasketItem"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "guid"
+          },
+          "number": {
+            "type": "string"
+          },
+          "lineNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "manufacturerCode": {
+            "type": "string"
+          },
+          "licenseModel": {
+            "type": "string"
+          },
+          "toolVendorNumber": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "duration": {
+            "$ref": "#/components/schemas/OpportunityLineDurationResponse"
+          },
+          "quantity": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "unitPrice": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "grossProfit": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "grossProfitTotal": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "lineWasAlreadyConvertedToBasketItem": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OpportunityLineDurationResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "months": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CreateBasketLineFromOpportunityLineRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "opportunityLineId",
+          "quantity"
+        ],
+        "properties": {
+          "opportunityLineId": {
+            "type": "string",
+            "format": "guid"
+          },
+          "internalItemNumber": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "FeedbackRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "topic",
+          "comment"
+        ],
+        "properties": {
+          "topic": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          }
+        }
+      },
+      "EventRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "eventType": {
+            "type": "string"
+          },
+          "payload": {
+            "additionalProperties": false
+          }
+        }
+      },
+      "Customer": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "name2",
+          "address",
+          "postCode",
+          "city",
+          "paymentTermsCode",
+          "isBlocked"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "name2": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "postCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "paymentTermsCode": {
+            "type": "string"
+          },
+          "currencyCode": {
+            "type": "string"
+          },
+          "isBlocked": {
+            "type": "boolean"
+          },
+          "billToCustomerId": {
+            "type": "string"
+          }
+        }
+      },
+      "Contact": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "name2",
+          "address",
+          "postCode",
+          "city"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "name2": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "postCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          }
+        }
+      },
+      "CurrencyResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "CaseResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "caseId",
+          "countryCode",
+          "sellToCustomerId",
+          "billToCustomerId",
+          "licenseToCustomerId",
+          "paymentTermCode",
+          "currencyCode",
+          "publishToPyraCloud",
+          "currencyIsLocked",
+          "showOpportunityTab"
+        ],
+        "properties": {
+          "caseId": {
+            "type": "string"
+          },
+          "purchaseOrderReference": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "sellToCustomerId": {
+            "type": "string"
+          },
+          "billToCustomerId": {
+            "type": "string"
+          },
+          "licenseToCustomerId": {
+            "type": "string"
+          },
+          "licenseToContactId": {
+            "type": "string"
+          },
+          "paymentTermCode": {
+            "type": "string"
+          },
+          "currencyCode": {
+            "type": "string"
+          },
+          "quoteValidUntil": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publishToPyraCloud": {
+            "$ref": "#/components/schemas/PublishToPyraCloudState"
+          },
+          "currencyIsLocked": {
+            "type": "boolean"
+          },
+          "showOpportunityTab": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CustomerSettingsResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sellToCustomerChanged",
+          "caseContextIsValid",
+          "caseId",
+          "countryCode",
+          "sellToCustomerId",
+          "billToCustomerId",
+          "licenseToCustomerId",
+          "countryCodeIsAvailable",
+          "crmCaseCountryChanged",
+          "countryCodeIsLocked"
+        ],
+        "properties": {
+          "sellToCustomerChanged": {
+            "type": "boolean"
+          },
+          "caseContextIsValid": {
+            "type": "boolean"
+          },
+          "caseId": {
+            "type": "string"
+          },
+          "countryCode": {
+            "type": "string"
+          },
+          "sellToCustomerId": {
+            "type": "string"
+          },
+          "billToCustomerId": {
+            "type": "string"
+          },
+          "licenseToCustomerId": {
+            "type": "string"
+          },
+          "licenseToContactId": {
+            "type": "string"
+          },
+          "countryCodeIsAvailable": {
+            "type": "boolean"
+          },
+          "crmCaseCountryChanged": {
+            "type": "boolean"
+          },
+          "countryCodeIsLocked": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CaseContextInitialisationResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "shouldRedirectToCustomerSettings"
+        ],
+        "properties": {
+          "shouldRedirectToCustomerSettings": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateCaseRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "countryCode",
+          "billToCustomerId",
+          "licenseToCustomerId"
+        ],
+        "properties": {
+          "countryCode": {
+            "type": "string"
+          },
+          "billToCustomerId": {
+            "type": "string"
+          },
+          "licenseToCustomerId": {
+            "type": "string"
+          },
+          "licenseToContactId": {
+            "type": "string"
+          }
+        }
+      },
+      "BasketResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "basketItems",
+          "totalQuantity",
+          "totalPrice",
+          "totalVat",
+          "creditLimit",
+          "isWithinCreditLimit",
+          "margin",
+          "validationErrors",
+          "hints"
+        ],
+        "properties": {
+          "basketItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BasketItemResponse"
+            }
+          },
+          "totalQuantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPrice": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "totalVat": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "creditLimit": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "isWithinCreditLimit": {
+            "type": "boolean"
+          },
+          "margin": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "validationErrors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hints": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BasketItemResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "internalItemNumber",
+          "manufacturer",
+          "publisherItemNumber",
+          "productName",
+          "productDescription",
+          "quantity",
+          "blocked",
+          "unitPurchasePrice",
+          "unitSalesPrice",
+          "margin",
+          "productVendor"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "internalItemNumber": {
+            "type": "string"
+          },
+          "manufacturer": {
+            "type": "string"
+          },
+          "publisherItemNumber": {
+            "type": "string"
+          },
+          "productName": {
+            "$ref": "#/components/schemas/OverridableOfString"
+          },
+          "productDescription": {
+            "$ref": "#/components/schemas/OverridableOfString"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "blocked": {
+            "type": "boolean"
+          },
+          "unitPurchasePrice": {
+            "$ref": "#/components/schemas/OverridableOfPriceResponse"
+          },
+          "unitSalesPrice": {
+            "$ref": "#/components/schemas/OverridableOfPriceResponse"
+          },
+          "totalVat": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "margin": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "marginPercent": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "licenceStartDateOverride": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "licenceEndDateOverride": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "productVendor": {
+            "$ref": "#/components/schemas/OverridableOfProductVendorResponse"
+          },
+          "contractNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "OverridableOfString": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "isOverridden"
+        ],
+        "properties": {
+          "overriddenValue": {
+            "type": "string"
+          },
+          "originalValue": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "isOverridden": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OverridableOfPriceResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "isOverridden"
+        ],
+        "properties": {
+          "overriddenValue": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "originalValue": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "value": {
+            "$ref": "#/components/schemas/PriceResponse"
+          },
+          "isOverridden": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OverridableOfProductVendorResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "isOverridden"
+        ],
+        "properties": {
+          "overriddenValue": {
+            "$ref": "#/components/schemas/ProductVendorResponse"
+          },
+          "originalValue": {
+            "$ref": "#/components/schemas/ProductVendorResponse"
+          },
+          "value": {
+            "$ref": "#/components/schemas/ProductVendorResponse"
+          },
+          "isOverridden": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BasketItemRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "internalItemNumber",
+          "quantity"
+        ],
+        "properties": {
+          "internalItemNumber": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 2147483647.0,
+            "minimum": 1.0
+          },
+          "contractNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "BasketItemQuantityChangeRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "basketItemId",
+          "quantity"
+        ],
+        "properties": {
+          "basketItemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "maximum": 2147483647.0,
+            "minimum": 1.0
+          }
+        }
+      },
+      "BasketItemSalesPriceOverrideChangeRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "basketItemId"
+        ],
+        "properties": {
+          "basketItemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "salesPriceOverrideAmount": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 2147483647.0,
+            "minimum": 0.0
+          },
+          "salesPriceOverrideCurrency": {
+            "type": "string"
+          }
+        }
+      },
+      "BasketItemPurchasePriceOverrideChangeRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "basketItemId"
+        ],
+        "properties": {
+          "basketItemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "purchasePriceOverrideAmount": {
+            "type": "number",
+            "format": "decimal",
+            "maximum": 2147483647.0,
+            "minimum": 0.0
+          },
+          "purchasePriceOverrideCurrency": {
+            "type": "string"
+          }
+        }
+      },
+      "BasketItemProductNameOverrideChangeRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "basketItemId",
+          "nameOverride"
+        ],
+        "properties": {
+          "basketItemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nameOverride": {
+            "type": "string"
+          }
+        }
+      },
+      "BasketItemProductDescriptionOverrideChangeRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "basketItemId",
+          "descriptionOverride"
+        ],
+        "properties": {
+          "basketItemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descriptionOverride": {
+            "type": "string"
+          }
+        }
+      },
+      "BasketItemLicenceStartDateOverrideChangeRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "basketItemId"
+        ],
+        "properties": {
+          "basketItemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dateOverride": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "BasketItemLicenceEndDateOverrideChangeRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "basketItemId"
+        ],
+        "properties": {
+          "basketItemId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dateOverride": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
