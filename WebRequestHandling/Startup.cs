@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using NJsonSchema;
 using NJsonSchema.Generation;
 using NSwag;
+using WebRequestHandling.NSwag;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace WebRequestHandling
@@ -30,7 +31,7 @@ namespace WebRequestHandling
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IHandler<Request, Response>, RequestHandler>();
+            services.AddScoped<IHandler<GetOrdersById, OrderResponse>, GetOrdersByRequestHandler>();
 
             services.AddOpenApiDocument();
         }
@@ -61,7 +62,7 @@ namespace WebRequestHandling
                 });
             });
 
-            var openApiDocument = Get();
+            
 
             app.UseSwaggerUi3();
         }
@@ -95,57 +96,7 @@ namespace WebRequestHandling
 
             return (request, requestType, responseType);
         }
-
-        private static OpenApiDocument Get()
-        {
-            var document = new OpenApiDocument
-            {
-                //BasePath = "swagger",
-                Info = { Title = "Test Doc", Description = "#1st Doc", Version = "v1" }
-            };
-
-            var jsonSchemaGeneratorSettings = new JsonSchemaGeneratorSettings();
-            var jsonSchemaGenerator = new JsonSchemaGenerator(jsonSchemaGeneratorSettings);
-            var openApiSchemaResolver = new OpenApiSchemaResolver(document, jsonSchemaGeneratorSettings);
-
-
-            //document.Components.Responses.Add();
-
-            var openApiOperation = new OpenApiOperation
-            {
-                Produces = new List<string> { "application/json" },
-                OperationId = "WebRequestHandling.Request",
-                Schemes = new List<OpenApiSchema> { OpenApiSchema.Https },
-                RequestBody = new OpenApiRequestBody()
-
-            };
-
-            openApiOperation.RequestBody.IsRequired = true;
-            openApiOperation.RequestBody.Position = 1;
-            openApiOperation.RequestBody.Content["application/json"] = new OpenApiMediaType { Schema = JsonSchema.CreateAnySchema() };
-
-            var openApiResponse = new OpenApiResponse();
-            openApiOperation.Responses.Add("200", openApiResponse);
-
-            openApiResponse.Description = "Response Description";
-            openApiResponse.Schema = jsonSchemaGenerator.GenerateWithReferenceAndNullability<JsonSchema>(
-                typeof(Response).ToContextualType(), true, openApiSchemaResolver);
-
-
-
-            var openApiPathItem = new OpenApiPathItem();
-            document.Paths.Add("rpc / WebRequestHandling.Request", openApiPathItem);
-            openApiPathItem.Add(OpenApiOperationMethod.Post, openApiOperation);
-                
-            
-
-            var json = document.ToJson(SchemaType.OpenApi3, Formatting.Indented);
-
-            return document;
-        }
     }
-
-
 
 
     public interface IHandler<in TRequest, TResponse> where TRequest : IRequest<TResponse>
@@ -156,33 +107,40 @@ namespace WebRequestHandling
     public interface IRequest<TResponse> { }
 
 
-    public class Request : IRequest<Response>
+    public class GetOrdersById : IRequest<OrderResponse>
     {
-        public string Message { get; set; }
+        public string Id { get; set; }
     }
 
-    public class Response
+    public class OrderResponse
     {
         public string Message { get; set; }
+        public Order Order { get; set; }
+    }
+
+    public class Order
+    {
+        public string Id { get; set; }
+        public DateTimeOffset OrderDate { get; set; }
     }
 
     /// <summary>
     /// Interface based
     /// </summary>
-    public class RequestHandler : IHandler<Request, Response>
+    public class GetOrdersByRequestHandler : IHandler<GetOrdersById, OrderResponse>
     {
-        public Task<Response> Handle(Request request)
+        public Task<OrderResponse> Handle(GetOrdersById getOrdersById)
         {
-            return Task.FromResult(new Response { Message = request.Message + " handled." });
+            return Task.FromResult(new OrderResponse { Message = getOrdersById.Id + " handled." });
         }
     }
 
     // Convention based
     public class RequestHandler2
     {
-        public Task<Response> Handle(Request request)
+        public Task<OrderResponse> Handle(GetOrdersById getOrdersById)
         {
-            return Task.FromResult(new Response { Message = request.Message + " handled." });
+            return Task.FromResult(new OrderResponse { Message = getOrdersById.Id + " handled." });
         }
     }
 
