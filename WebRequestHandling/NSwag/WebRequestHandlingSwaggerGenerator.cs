@@ -50,7 +50,7 @@ namespace WebRequestHandling.NSwag
 
         private bool GenerateForHandler(OpenApiDocument document, Type handlerType, OpenApiDocumentGenerator swaggerGenerator, OpenApiSchemaResolver schemaResolver)
         {
-            var methodInfo = handlerType.GetMethods().Single();
+            var methodInfo = handlerType.GetMethod("Handle");
             var isQuery = handlerType.IsAssignableToGenericType(typeof(IQueryRequestHandler<,>));
 
             var httpMethod = isQuery ? "GET" : "POST";

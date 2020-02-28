@@ -57,10 +57,8 @@ namespace WebRequestHandling
                 });
             });
 
-            
             app.UseOpenApiWithRequestHandling();
-
-            //app.UseSwaggerUi3();
+            app.UseSwaggerUi3(x => x.DocumentPath = "swagger/v1/swagger.json");
         }
 
         private static async Task InvokeHandler(HttpContext context, object request, Type requestType, Type responseType)
@@ -99,9 +97,7 @@ namespace WebRequestHandling
     {
         public static IApplicationBuilder UseOpenApiWithRequestHandling(this IApplicationBuilder app)
         {
-            var settings = new OpenApiDocumentMiddlewareSettings();
-
-            return app.UseMiddleware<WebOpenApiDocumentMiddleware>(settings.DocumentName, settings.Path, settings);
+            return app.UseMiddleware<WebOpenApiDocumentMiddleware>();
         }
     }
 
