@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebRequestHandling", "WebRequestHandling\WebRequestHandling.csproj", "{87B41332-4519-4F9A-899A-DA4AC57B2F2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebRequestrHandling.Tests", "WebRequestrHandling.Tests\WebRequestrHandling.Tests.csproj", "{2364723A-8E8D-44E5-9FF7-483A9EEEDAA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebRequestHandling.Tests", "WebRequestHandling.Tests\WebRequestHandling.Tests.csproj", "{2364723A-8E8D-44E5-9FF7-483A9EEEDAA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

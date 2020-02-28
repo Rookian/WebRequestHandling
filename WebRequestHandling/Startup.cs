@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -9,11 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Namotion.Reflection;
-using Newtonsoft.Json;
-using NJsonSchema;
-using NJsonSchema.Generation;
-using NSwag;
+using NSwag.AspNetCore;
 using WebRequestHandling.NSwag;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -31,9 +26,9 @@ namespace WebRequestHandling
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IHandler<GetOrdersById, OrderResponse>, GetOrdersByRequestHandler>();
-
-            services.AddOpenApiDocument();
+            services.AddScoped<IQueryRequestHandler<GetOrdersById, OrderResponse>, GetOrdersByRequestQueryRequestHandler>();
+            
+            //services.AddOpenApiDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +50,7 @@ namespace WebRequestHandling
                     await context.Response.WriteAsync("works");
                 });
 
-                endpoints.MapPost("rpc/{type}", async context =>
+                endpoints.MapGet("rpc/{type}", async context =>
                 {
                     var (request, requestType, responseType) = await GetRequest(context);
                     await InvokeHandler(context, request, requestType, responseType);
@@ -63,13 +58,14 @@ namespace WebRequestHandling
             });
 
             
+            app.UseOpenApiWithRequestHandling();
 
-            app.UseSwaggerUi3();
+            //app.UseSwaggerUi3();
         }
 
         private static async Task InvokeHandler(HttpContext context, object request, Type requestType, Type responseType)
         {
-            var handlerType = typeof(IHandler<,>).MakeGenericType(requestType, responseType);
+            var handlerType = typeof(IQueryRequestHandler<,>).MakeGenericType(requestType, responseType);
 
             var handler = (dynamic)context.RequestServices.GetService(handlerType);
             var response = await handler.Handle((dynamic)request);
@@ -99,7 +95,17 @@ namespace WebRequestHandling
     }
 
 
-    public interface IHandler<in TRequest, TResponse> where TRequest : IRequest<TResponse>
+    public static class BuilderExtensions
+    {
+        public static IApplicationBuilder UseOpenApiWithRequestHandling(this IApplicationBuilder app)
+        {
+            var settings = new OpenApiDocumentMiddlewareSettings();
+
+            return app.UseMiddleware<WebOpenApiDocumentMiddleware>(settings.DocumentName, settings.Path, settings);
+        }
+    }
+
+    public interface IQueryRequestHandler<in TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
         Task<TResponse> Handle(TRequest request);
     }
@@ -127,7 +133,7 @@ namespace WebRequestHandling
     /// <summary>
     /// Interface based
     /// </summary>
-    public class GetOrdersByRequestHandler : IHandler<GetOrdersById, OrderResponse>
+    public class GetOrdersByRequestQueryRequestHandler : IQueryRequestHandler<GetOrdersById, OrderResponse>
     {
         public Task<OrderResponse> Handle(GetOrdersById getOrdersById)
         {

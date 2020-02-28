@@ -10,7 +10,7 @@ using NSwag.Generation.Processors.Contexts;
 
 namespace WebRequestHandling.NSwag
 {
-    public class WebRequestHandlingSwaggerGenerator
+    public class WebRequestHandlingSwaggerGenerator 
     {
         public WebRequestHandlingSwaggerGeneratorSettings Settings { get; }
 
@@ -24,7 +24,7 @@ namespace WebRequestHandling.NSwag
             var document = await CreateDocumentAsync().ConfigureAwait(false);
             var schemaResolver = new OpenApiSchemaResolver(document, Settings);
 
-            var handlerTypes = new List<Type> { typeof(GetOrdersByRequestHandler) }; // TODO scan for more handlers
+            var handlerTypes = new List<Type> { typeof(GetOrdersByRequestQueryRequestHandler) }; // TODO scan for more handlers
             var usedHandlerTypes = new List<Type>();
 
             foreach (var handlerType in handlerTypes)
@@ -50,12 +50,10 @@ namespace WebRequestHandling.NSwag
 
         private bool GenerateForHandler(OpenApiDocument document, Type handlerType, OpenApiDocumentGenerator swaggerGenerator, OpenApiSchemaResolver schemaResolver)
         {
-            var methodInfo = handlerType.GetMethod("Handle"); // TODO
-            if (methodInfo == null)
-                throw new Exception("No Handle method");
+            var methodInfo = handlerType.GetMethods().Single();
+            var isQuery = handlerType.IsAssignableToGenericType(typeof(IQueryRequestHandler<,>));
 
-
-            var httpMethod = "GET"; // TODO 
+            var httpMethod = isQuery ? "GET" : "POST";
             var httpPath = $"/rpc/{GetRequestTypeFullName(methodInfo)}";
 
             var operationDescription = new OpenApiOperationDescription

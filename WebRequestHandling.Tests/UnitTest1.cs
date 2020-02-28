@@ -4,7 +4,7 @@ using NJsonSchema;
 using WebRequestHandling.NSwag;
 using Xunit;
 
-namespace WebRequestrHandling.Tests
+namespace WebRequestHandling.Tests
 {
     public class UnitTest1
     {
