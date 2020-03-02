@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NSwag.Generation.Processors;
 using NSwag.Generation.Processors.Contexts;
 
-namespace WebRequestHandling.NSwag
+namespace WebRequestHandling.Infrastructure.NSwag
 {
     public class OperationResponseProcessor : OperationResponseProcessorBase, IOperationProcessor
     {

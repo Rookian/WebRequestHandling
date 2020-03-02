@@ -7,10 +7,11 @@ using NJsonSchema;
 using NSwag;
 using NSwag.Generation;
 using NSwag.Generation.Processors.Contexts;
+using WebRequestHandling.Infrastructure.ExecutionPipeline;
 
-namespace WebRequestHandling.NSwag
+namespace WebRequestHandling.Infrastructure.NSwag
 {
-    public class WebRequestHandlingSwaggerGenerator 
+    public class WebRequestHandlingSwaggerGenerator
     {
         public WebRequestHandlingSwaggerGeneratorSettings Settings { get; }
 
@@ -19,12 +20,12 @@ namespace WebRequestHandling.NSwag
             Settings = settings;
         }
 
-        public async Task<OpenApiDocument> GenerateDocument()
+        public async Task<OpenApiDocument> GenerateDocument(Assembly assembly)
         {
             var document = await CreateDocumentAsync().ConfigureAwait(false);
             var schemaResolver = new OpenApiSchemaResolver(document, Settings);
 
-            var handlerTypes = new List<Type> { typeof(GetOrdersByRequestQueryRequestHandler) }; // TODO scan for more handlers
+            var handlerTypes = GetAllHandlerTypes(assembly);
             var usedHandlerTypes = new List<Type>();
 
             foreach (var handlerType in handlerTypes)
@@ -48,12 +49,20 @@ namespace WebRequestHandling.NSwag
             return document;
         }
 
+        private static List<Type> GetAllHandlerTypes(Assembly assembly)
+        {
+            var commands = Reflection.GetAllTypesImplementingOpenGenericType(typeof(ICommandRequestHandler<,>), assembly);
+            var queries = Reflection.GetAllTypesImplementingOpenGenericType(typeof(IQueryRequestHandler<,>), assembly);
+
+            return new List<Type>(commands.Concat(queries));
+        }
+
         private bool GenerateForHandler(OpenApiDocument document, Type handlerType, OpenApiDocumentGenerator swaggerGenerator, OpenApiSchemaResolver schemaResolver)
         {
             var methodInfo = handlerType.GetMethod("Handle");
             var isQuery = handlerType.IsAssignableToGenericType(typeof(IQueryRequestHandler<,>));
 
-            var httpMethod = isQuery ? "GET" : "POST";
+            var httpMethod = isQuery ? OpenApiOperationMethod.Get : OpenApiOperationMethod.Post;
             var httpPath = $"/rpc/{GetRequestTypeFullName(methodInfo)}";
 
             var operationDescription = new OpenApiOperationDescription
@@ -160,6 +169,7 @@ namespace WebRequestHandling.NSwag
 
     public class WebRequestHandlingSwaggerGeneratorSettings : OpenApiDocumentGeneratorSettings
     {
+        public Assembly Assembly { get; set; }
         public WebRequestHandlingSwaggerGeneratorSettings()
         {
             OperationProcessors.Add(new OperationResponseProcessor(this));

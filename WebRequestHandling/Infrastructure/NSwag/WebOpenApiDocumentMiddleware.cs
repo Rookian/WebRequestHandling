@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace WebRequestHandling.NSwag
+namespace WebRequestHandling.Infrastructure.NSwag
 {
     public class WebOpenApiDocumentMiddleware
     {
@@ -12,7 +12,10 @@ namespace WebRequestHandling.NSwag
         public WebOpenApiDocumentMiddleware(RequestDelegate next)
         {
             _next = next;
-            _generator = new WebRequestHandlingSwaggerGenerator(new WebRequestHandlingSwaggerGeneratorSettings());
+            _generator = new WebRequestHandlingSwaggerGenerator(new WebRequestHandlingSwaggerGeneratorSettings
+            {
+                Assembly = typeof(Startup).Assembly // TODO
+            });
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -22,7 +25,7 @@ namespace WebRequestHandling.NSwag
             if (context.Request.Path.HasValue && string.Equals(context.Request.Path.Value.Trim('/'), path.Trim('/'),
                 StringComparison.OrdinalIgnoreCase))
             {
-                var document = await _generator.GenerateDocument();
+                var document = await _generator.GenerateDocument(_generator.Settings.Assembly);
                 context.Response.StatusCode = 200;
                 context.Response.Headers["Content-Type"] = "application/json; charset=utf-8";
                 await context.Response.WriteAsync(document.ToJson());

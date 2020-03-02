@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 
-namespace WebRequestHandling.NSwag
+namespace WebRequestHandling.Infrastructure.NSwag
 {
     public static class HttpRequestExtension
     {
